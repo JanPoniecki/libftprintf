@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponieck <jponieck@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,24 +10,36 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFTPRINTF_H
-# define LIBFTPRINTF_H
+#include "libftprintf.h"
 
-# include <stddef.h>
-# include <unistd.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <stdarg.h>
-# include <string.h>
-# include "libft/libft.h"
+static void	write_ud(unsigned int nb, int fd)
+{
+	char	c;
 
-int	ft_printf(const char *src, ...);
-int	count_args(const char *src);
-int	print_stuff(const char *s, va_list ap);
-int	ft_putptr_fd(void *p, int fd);
-int	ft_putud_fd(unsigned int n, int fd);
-int	ft_puthex_fd(unsigned int n, int fd, char cse);
-int	ft_putnbr_count(int v, int fd);
-int ft_putstr_count(char *v, int fd);
+	if (nb < 10)
+	{
+		c = nb + 48;
+		write(fd, &c, 1);
+	}
+	else
+	{
+		write_ud(nb / 10, fd);
+		write_ud(nb % 10, fd);
+	}
+}
 
-#endif
+int	ft_putud_fd(unsigned int nb, int fd)
+{
+	int	chars;
+
+	write_ud(nb, fd);
+	if (nb == 0)
+		return(1);
+	chars = 0;
+	while (nb != 0)
+	{
+		nb = nb / 10;
+		chars++;
+	}
+	return (chars);
+}

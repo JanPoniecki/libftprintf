@@ -1,39 +1,63 @@
 #include "libftprintf.h"
 
-static void	print_var_4(char s, int v)
+static int	ft_putchar_fd_count(char c, int fd)
 {
-	if (s == 'd' || s == 'i')
-		ft_putnbr_fd(v, 1);
-	if (s == 'c')
-		ft_putchar_fd(v, 1);
+	ft_putchar_fd(c, fd);
+	return (1);
 }
 
-static void	print_var_8(char s, void *v)
+static int	print_var_4(char s, int v)
 {
+	int	chars;
+
+	chars = 0;
+	if (s == 'd' || s == 'i')
+		chars += ft_putnbr_count(v, 1);
+	if (s == 'c')
+		chars += ft_putchar_fd_count(v, 1);
+	if (s == 'u')
+		chars += ft_putud_fd((unsigned int)v, 1);
+	if (s == 'x' || s == 'X')
+		chars += ft_puthex_fd((unsigned int)v, 1, s);
+	return (chars);
+}
+
+static int	print_var_8(char s, void *v)
+{
+	int	chars;
+
+	chars = 0;
 	if (s == 's')
-		ft_putstr_fd((char *)v, 1);
+		chars += ft_putstr_count((char *)v, 1);
+	if (s == 'p')
+		chars += ft_putptr_fd(v, 1);
+	return (chars);
 }
 
 int	print_stuff(const char *s, va_list ap)
 {
-	int		mode;
+	int	mode;
+	int	chars;
 
 	mode = -1;
+	chars = 0;
 	while (*s)
 	{
 		if (*s == '%' && mode == -1)
 			mode *= -1;
 		else if (mode == 1)
 		{
-			if (strchr("dic", *s))
-				print_var_4(*s, va_arg(ap, int));
-			if (strchr("s", *s))
-				print_var_8(*s, va_arg(ap, void *));
+			if (*s == '%')
+				chars += ft_putchar_fd_count(*s, 1);
+			if (strchr("dicuxX", *s))
+				chars += print_var_4(*s, va_arg(ap, int));
+			if (strchr("sp", *s))
+				chars += print_var_8(*s, va_arg(ap, void *));
 			mode *= -1;
 		}
 		else
-			ft_putchar_fd(*s, 1);
+			chars += ft_putchar_fd_count(*s, 1);
 		s++;
 	}
-	return (0);
+	return (chars);
 }
