@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jponieck <jponieck@student.42warsaw.pl>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 12:07:37 by nshahid           #+#    #+#             */
-/*   Updated: 2023/05/27 12:07:37 by nshahid          ###   ########.fr       */
+/*   Updated: 2024/03/02 14:22:58 by jponieck         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int	ft_putptr_fd(void *p, int fd);
 int	ft_putud_fd(unsigned int n, int fd);
 int	ft_puthex_fd(unsigned int n, int fd, char cse);
 int	ft_putnbr_count(int v, int fd);
-int ft_putstr_count(char *v, int fd);
+int	ft_putstr_count(char *v, int fd);
 
 #endif
