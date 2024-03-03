@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 static void	conv_to_16(unsigned int n, char *base, int fd, int *chars)
 {
