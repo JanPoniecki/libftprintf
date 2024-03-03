@@ -12,10 +12,16 @@
 
 #include "libftprintf.h"
 
-static int	ft_putchar_fd_count(char c, int fd)
+static void	putchar_check(const char *s, int fd, int *chars)
 {
-	ft_putchar_fd(c, fd);
-	return (1);
+	if (*s == '%' && *(s + 1) == 0)
+	{
+		*chars = -1;
+		return ;
+	}
+	ft_putchar_fd(*s, fd);
+	if (1 == 1)
+		(*chars)++;
 }
 
 static int	print_var_4(char s, int v)
@@ -46,6 +52,17 @@ static int	print_var_8(char s, void *v)
 	return (chars);
 }
 
+int	check_char(char s, int fd)
+{
+	int	chars;
+
+	chars = 0;
+	chars += ft_putchar_fd_count('%', fd);
+	if (s != '%')
+		chars += ft_putchar_fd_count(s, fd);
+	return (chars);
+}
+
 int	print_stuff(const char *s, va_list ap)
 {
 	int	mode;
@@ -55,20 +72,20 @@ int	print_stuff(const char *s, va_list ap)
 	chars = 0;
 	while (*s)
 	{
-		if (*s == '%' && mode == -1)
+		if (*s == '%' && mode == -1 && *(s + 1) != 0)
 			mode *= -1;
 		else if (mode == 1)
 		{
-			if (*s == '%')
-				chars += ft_putchar_fd_count(*s, 1);
 			if (strchr("dicuxX", *s))
 				chars += print_var_4(*s, va_arg(ap, int));
-			if (strchr("sp", *s))
+			else if (strchr("sp", *s))
 				chars += print_var_8(*s, va_arg(ap, void *));
+			else
+				chars += check_char(*s, 1);
 			mode *= -1;
 		}
 		else
-			chars += ft_putchar_fd_count(*s, 1);
+			putchar_check(s, 1, &chars);
 		s++;
 	}
 	return (chars);

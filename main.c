@@ -1,7 +1,7 @@
 #include "libftprintf.h"
 #include "stdio.h"
 
-int main()
+int main(int argc, char **argv)
 {
 	int a = 0;
 
@@ -14,8 +14,12 @@ int main()
 	int x = a;
 	int X = a;
 
-	int res1 = ft_printf("char %c, str %s, ptr %p, dec %d, int %i, uns %u, hex %x, HEX %X, %%%%\n", c, s, p, d, i, u, x, X);
-	int res2 = printf("char %c, str %s, ptr %p, dec %d, int %i, uns %u, hex %x, HEX %X, %%%%\n", c, s, p, d, i, u, x, X);
-	printf("r1  %d\n", res1);
-	printf("r2  %d\n", res2);
+	// int res1 = ft_printf("char %c, str %s, ptr %p, dec %d, int %i, uns %u, hex %x, HEX %X, %%%\n", c, s, p, d, i, u, x, X);
+	// int res2 = printf("char %c, str %s, ptr %p, dec %d, int %i, uns %u, hex %x, HEX %X, %%%\n", c, s, p, d, i, u, x, X);
+	int res1 = ft_printf("%%%%%");
+	ft_printf("\n");
+	int res2 = printf("%%%%%");
+	printf("\n");
+	printf("r1_%d\n", res1);
+	printf("r2_%d\n", res2);
 }

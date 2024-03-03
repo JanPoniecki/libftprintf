@@ -29,5 +29,6 @@ int	ft_putud_fd(unsigned int n, int fd);
 int	ft_puthex_fd(unsigned int n, int fd, char cse);
 int	ft_putnbr_count(int v, int fd);
 int	ft_putstr_count(char *v, int fd);
+int	ft_putchar_fd_count(char c, int fd);
 
 #endif

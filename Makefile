@@ -2,7 +2,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 NAME = libftprintf.a
 
-SRC_FILES = ft_printf.c count_args.c print_stuff.c ft_putptr_fd.c ft_putud_fd.c ft_puthex_fd.c ft_putnbr_count.c ft_putstr_count.c
+SRC_FILES = ft_printf.c print_stuff.c ft_putptr_fd.c ft_putud_fd.c ft_puthex_fd.c ft_putnbr_count.c ft_putstr_count.c ft_putchar_fd_count.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 
 all: $(NAME)
