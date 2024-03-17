@@ -15,10 +15,8 @@
 
 # include <stddef.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <stdarg.h>
-# include <string.h>
 # include "libft/libft.h"
 
 int	ft_printf(const char *src, ...);
