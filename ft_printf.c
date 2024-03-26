@@ -22,3 +22,15 @@ int	ft_printf(const char *src, ...)
 	va_end(ap);
 	return (chars);
 }
+/*
+#include <stdio.h>
+int main()
+{
+	// char *test = "test_string";
+	char *test = NULL;
+	int res1 = ft_printf("test numer %d, %c, %i, %u, %x, %X, %s, %p, %% %w %\n", 123, 'a', 333, -1, 23445, 324213, test, test);
+	int res2 = printf("test numer %d, %c, %i, %u, %x, %X, %s, %p, %% %w %\n", 123, 'a', 333, -1, 23445, 324213, test, test);
+	printf("%d  %d  \n", res1, res2);
+	return (0);
+}
+*/

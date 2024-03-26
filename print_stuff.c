@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void	putchar_check(const char *s, int fd, int *chars)
+/* static void	putchar_check(const char *s, int fd, int *chars)
 {
 	if (*s == '%' && *(s + 1) == 0)
 	{
@@ -30,7 +30,7 @@ static int	print_var_4(char s, int v)
 
 	chars = 0;
 	if (s == 'd' || s == 'i')
-		chars += ft_putnbr_count(v, 1);
+		y
 	if (s == 'c')
 		chars += ft_putchar_fd_count(v, 1);
 	if (s == 'u')
@@ -86,6 +86,46 @@ int	print_stuff(const char *s, va_list ap)
 		}
 		else
 			putchar_check(s, 1, &chars);
+		s++;
+	}
+	return (chars);
+} */
+
+int	print_var(const char *s, va_list ap)
+{
+	if (*(s + 1) == 'd' || *(s + 1) == 'i')
+		return (ft_putnbr_count(va_arg(ap, int), 1));
+	else if (*(s + 1) == 'c')
+		return (ft_putchar_fd_count(va_arg(ap, int), 1));
+	else if (*(s + 1) == 'u')
+		return (ft_putud_fd(va_arg(ap, unsigned int), 1));
+	else if (*(s + 1) == 'x' || *(s + 1) == 'X')
+		return (ft_puthex_fd(va_arg(ap, unsigned int), 1, *(s + 1)));
+	else if (*(s + 1) == 's')
+		return (ft_putstr_count(va_arg(ap, char *), 1));
+	else if (*(s + 1) == 'p')
+		return (ft_putptr_fd(va_arg(ap, void *), 1));
+	else
+		return(ft_putchar_fd_count(*(s + 1), 1));
+}
+
+
+int	print_stuff(const char *s, va_list ap)
+{
+	int	chars;
+
+	chars = 0;
+	while (1)
+	{
+		if (*s == 0)
+			break ;
+		if (*s == '%' && ft_strchr("dicuxXsp%" ,*(s + 1)))
+		{
+			chars += print_var(s, ap);
+			s++;
+		}
+		else
+			chars += ft_putchar_fd_count(*s, 1);
 		s++;
 	}
 	return (chars);
